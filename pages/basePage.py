@@ -7,6 +7,7 @@
 
 from selenium import webdriver
 from selenium.webdriver.support import expected_conditions as EC
+from selenium.webdriver.common.action_chains import ActionChains
 from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.common.by import By
 from utils.mySettings import timeout,polTime
@@ -34,7 +35,7 @@ class BasePage:
             EC.visibility_of_element_located(locator)
         )
         #解包
-        return self.driver.find_elements(*locator)
+        return self.driver.find_element(*locator)
 
     def find_element(self,locator):
         return self.driver.find_element(*locator)
@@ -54,6 +55,9 @@ class BasePage:
 
     def get_title(self):
         return self.driver.title
+
+    def mouse_left_click(self,locator):
+        return ActionChains(self.driver).click(locator).perform()
 
 
 

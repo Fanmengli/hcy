@@ -23,7 +23,7 @@ class CustomerManagerPage(HomePageAction):
     deliverProductButton = (By.CSS_SELECTOR,"a[href=\"#/deliver/product\"]")
 
     def confirmBox(self):
-        return self.find_element(self.confirmButton)
+        return self.get_element(self.confirmButton)
 
     def deliverButtonBox(self):
         return self.find_element(self.deliverButton)

@@ -7,6 +7,8 @@
 
 from selenium import webdriver
 
+webdriverDir = "D:\jmeter视频教程\selenium\chromedriver.exe"
+
 loginUrl = "http://www7.haicaoyun.com/hlj-merchant-center/dist/index.html#/login"
 account = "15744445510"
 password = "123456mM"

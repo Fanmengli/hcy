@@ -59,6 +59,11 @@ class BasePage:
     def mouse_left_click(self,locator):
         return ActionChains(self.driver).click(locator).perform()
 
+    def alert_accept(self,locator):
+        """弹窗点击确认"""
+        self.find_element(locator).click()
+        self.driver.switch_to.alert.accept()
+
 
 
 

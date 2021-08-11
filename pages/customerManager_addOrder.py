@@ -98,7 +98,7 @@ class CustomerManagerAddOrderAction(CustomerManagerAddOrder):
 customerManagerAddOrderObj = CustomerManagerAddOrderAction()
 
 if __name__ == '__main__':
-    first_name = "ceshi"+str(random.randint(100,1000))
+    first_name = "自动"+str(random.randint(100,1000))
     first_phone = "1578888{}".format(random.randint(1000,9999))
     current_time = datetime.datetime.now().strftime('%Y-%m-%d')
     print("current_time:",current_time)

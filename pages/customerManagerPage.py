@@ -28,6 +28,8 @@ class CustomerManagerPage(HomePageAction):
     order_title = (By.CSS_SELECTOR,".style__list_content--3nl4g>li:nth-child(1) h4")
     """订单拍摄日期"""
     order_shoot_time = (By.CSS_SELECTOR,".style__list_content--3nl4g>li:nth-child(1) p[title]")
+    """第一个订单"""
+    first_order = (By.CSS_SELECTOR,".style__list_content--mat4N>li:nth-child(1)")
 
     def confirmBox(self):
         """进入crm系统后的确认弹框"""
@@ -57,6 +59,10 @@ class CustomerManagerPage(HomePageAction):
         """得到订单拍摄日期"""
         return self.find_element(self.order_shoot_time)
 
+    def getFirstOrder(self):
+        """得到第一个订单"""
+        return self.find_element(self.first_order)
+
 class CustomerManagerPageAction(CustomerManagerPage):
 
     def gotoConfirm(self):
@@ -85,6 +91,9 @@ class CustomerManagerPageAction(CustomerManagerPage):
     def getOrderShootTimeAction(self):
         shootTimeText = self.getOrderShootTime().text
         return shootTimeText.split("：")[1]
+
+    def gotoFirstOrderAction(self):
+        self.getFirstOrder().click()
 
 if __name__ == '__main__':
     CustomerManagerPageAction().gotoPage()

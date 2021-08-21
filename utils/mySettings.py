@@ -9,7 +9,9 @@ from selenium import webdriver
 
 webdriverDir = "D:\jmeter视频教程\selenium\chromedriver.exe"
 
-loginUrl = "http://www7.haicaoyun.com/hlj-merchant-center/dist/index.html#/login"
+host = "http://www7.haicaoyun.com"
+
+loginUrl = f"{host}/hlj-merchant-center/dist/index.html#/login"
 account = "15744445510"
 password = "123456mM"
 
@@ -17,3 +19,6 @@ timeout = 15
 polTime = 0.5
 
 customerManagerUrl = "http://crm7.haicaoyun.com/haicaoyun-front/dist/index.html#/businessOverview"
+
+if __name__ == '__main__':
+    print(loginUrl)

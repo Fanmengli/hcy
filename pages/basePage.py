@@ -10,7 +10,7 @@ from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.common.action_chains import ActionChains
 from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.common.by import By
-from utils.mySettings import timeout,polTime
+from utils.mySettings import timeout,polTime,host
 
 from utils.myDriver import Driver
 
@@ -41,6 +41,7 @@ class BasePage:
         return self.driver.find_element(*locator)
 
     def switch_to_page(self,url):
+        url = f'{host}url'
         allHandle = self.driver.window_handles
         for handle in allHandle:
             self.driver.switch_to.window(handle)
@@ -64,14 +65,39 @@ class BasePage:
         self.find_element(locator).click()
         self.driver.switch_to.alert.accept()
 
-    # @classmethod
     def quitDriver(self):
         print('-----teardown-----')
-        return self._driver.quit()
+        self.driver.quit()
 
     def mouse_left_click(self,locator):
+        """左击"""
         ActionChains(self.driver).click(locator).perform()
 
+    def forward(self):
+        """前进"""
+        self.driver.forward()
+
+    def back(self):
+        """后退"""
+        self.driver.back()
+
+    def move_to_element(self,locator):
+        """悬停到某个元素"""
+        ActionChains(self.driver).move_to_element(self.driver.find_element(locator)).perform()
+
+    def context_click(self,locator):
+        """右击"""
+        ActionChains(self.driver).context_click(self.driver.find_element(locator)).perform()
+
+    def context_click(self,locator):
+        """右击"""
+        ActionChains(self.driver).double_click(self.driver.find_element(locator)).perform()
+
+    def drag_and_drop(self,locator1,locator2):
+        """右击"""
+        loc1 = self.driver.find_element(locator1)
+        loc2 = self.driver.find_element(locator2)
+        ActionChains(self.driver).drag_and_drop(loc1,loc2).perform()
 
 
 

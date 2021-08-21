@@ -29,7 +29,7 @@ class CustomerManagerPage(HomePageAction):
     """订单拍摄日期"""
     order_shoot_time = (By.CSS_SELECTOR,".style__list_content--3nl4g>li:nth-child(1) p[title]")
     """第一个订单"""
-    first_order = (By.CSS_SELECTOR,".style__list_content--mat4N>li:nth-child(1)")
+    first_order = (By.CSS_SELECTOR,"ul[class^=style__list_content]>li:nth-child(1)")
 
     def confirmBox(self):
         """进入crm系统后的确认弹框"""
@@ -82,25 +82,40 @@ class CustomerManagerPageAction(CustomerManagerPage):
         time.sleep(1)
         self.deliverAlbumButtonBox().click()
 
+    def gotoDeliverAlbumAction(self):
+        """进入影集交付页面"""
+        self.gotoPage()
+        self.gotoConfirm()
+        self.gotoDeliver()
+        self.gotoDeliverAlbum()
+
+
     def getOrderTitleAction(self):
-        contentText = self.getOrderTitle().get_attribute("textContent")
-        firstNameText = contentText.split("&")[1].strip()
-        coupleNameText = contentText.split("&")[0].strip()
-        return firstNameText,coupleNameText
+        # contentText = self.getOrderTitle().get_attribute("textContent")
+        try:
+            contentText = self.getOrderTitle().get_attribute("textContent")
+            firstNameText = contentText.split("&")[1].strip()
+            coupleNameText = contentText.split("&")[0].strip()
+            return firstNameText, coupleNameText
+        except IndexError:
+            print("没有第一联系人姓名")
+        # firstNameText = contentText.split("&")[1].strip()
+        # coupleNameText = contentText.split("&")[0].strip()
+        # return firstNameText,coupleNameText
 
     def getOrderShootTimeAction(self):
         shootTimeText = self.getOrderShootTime().text
         return shootTimeText.split("：")[1]
 
     def gotoFirstOrderAction(self):
-        self.getFirstOrder().click()
+        return self.getFirstOrder().click()
+
 
 if __name__ == '__main__':
-    CustomerManagerPageAction().gotoPage()
-    CustomerManagerPageAction().gotoDeliver()
-    CustomerManagerPageAction().gotoDeliverAlbum()
-    print("标题：",CustomerManagerPageAction().getOrderTitleAction())
-    print("时间：",CustomerManagerPageAction().getOrderShootTimeAction())
+    CustomerManagerPageAction().gotoDeliverAlbumAction()
+    CustomerManagerPageAction().gotoFirstOrderAction()
+    # print("标题：",CustomerManagerPageAction().getOrderTitleAction())
+    # print("时间：",CustomerManagerPageAction().getOrderShootTimeAction())
 
 
 

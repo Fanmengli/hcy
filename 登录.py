@@ -2,7 +2,7 @@ from selenium import webdriver
 import time
 
 #driver设置全局变量
-driver =webdriver.Chrome()
+driver =webdriver.Chrome("D:\jmeter视频教程\selenium\chromedriver.exe")
 
 class LoginPage:
     def __init__(self,url,driver):

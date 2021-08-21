@@ -64,6 +64,15 @@ class BasePage:
         self.find_element(locator).click()
         self.driver.switch_to.alert.accept()
 
+    # @classmethod
+    def quitDriver(self):
+        print('-----teardown-----')
+        return self._driver.quit()
+
+    def mouse_left_click(self,locator):
+        ActionChains(self.driver).click(locator).perform()
+
+
 
 
 

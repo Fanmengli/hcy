@@ -15,8 +15,8 @@ from utils.mySettings import customerManagerUrl
 class HomePage(BasePage):
     customerManagerButton = (By.ID, u"serviceCardItem4")
 
-    # def __init__(self):
-    #     super().__init__()
+    def __init__(self):
+        super().__init__()
 
     def customerManagerButtonBox(self):
         return self.find_element(self.customerManagerButton)
@@ -27,7 +27,6 @@ class HomePageAction(HomePage):
         time.sleep(1)
         self.customerManagerButtonBox().click()
         self.switch_to_page(customerManagerUrl)
-        time.sleep(1)
 
 
 if __name__ == '__main__':

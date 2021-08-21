@@ -6,7 +6,7 @@
 # @Software  :   PyCharm
 
 from selenium import webdriver
-from utils.mySettings import loginUrl, account, password
+from utils.mySettings import loginUrl, account, password,webdriverDir
 
 
 class Driver:
@@ -17,11 +17,11 @@ class Driver:
     def get_driver(cls, browserName="Chrome"):
         if cls._driver == None:
             if browserName == "Chrome":
-                cls._driver = webdriver.Chrome()
+                cls._driver = webdriver.Chrome(webdriverDir)
             elif browserName == "ie":
-                cls._driver = webdriver.Ie()
+                cls._driver = webdriver.Ie(webdriverDir)
             elif browserName == "firefox":
-                cls._driver == webdriver.Firefox()
+                cls._driver == webdriver.Firefox(webdriverDir)
             else:
                 raise ("找不到浏览器，请检查传参")
             # 第一次，设置最大化和隐式等待
@@ -29,6 +29,7 @@ class Driver:
             cls._driver.implicitly_wait(3)
             # login在这里执行，保证登录在其他操作之前
             cls.login()
+
         return cls._driver
 
     # 登录就一次就可以
@@ -41,6 +42,8 @@ class Driver:
         """
         # cls._driver = webdriver.Chrome()
         cls._driver.get(loginUrl)
+        # if cls._driver.current_url != loginUrl:
+        #     cls._driver.switch_to(loginUrl)
         cls._driver.find_element_by_css_selector(".index-module__account--238f5 input").send_keys(account)
         cls._driver.find_element_by_css_selector(".index-module__password--1fHpE input").send_keys(password)
         cls._driver.find_element_by_class_name("index-module__login-btn--1En8M").click()
@@ -48,3 +51,4 @@ class Driver:
 
 if __name__ == '__main__':
     Driver.get_driver()
+

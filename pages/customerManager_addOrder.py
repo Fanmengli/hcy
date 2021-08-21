@@ -18,7 +18,7 @@ class CustomerManagerAddOrder(CustomerManagerPageAction):
     def __init__(self):
         super().__init__()
     # 添加影集按钮
-    add_order = (By.CSS_SELECTOR,".style__pay_left--uYB41>.hljd-btn-primary:nth-child(2)")
+    add_order = (By.CSS_SELECTOR,"div[class^=style__pay_left]>.hljd-btn-primary:nth-child(2)")
     # """first_name"""
     first_name = (By.CSS_SELECTOR,"[id=\"name\"]")
     # """first_phone"""
@@ -67,6 +67,7 @@ class CustomerManagerAddOrder(CustomerManagerPageAction):
         return self.find_element(self.sure_btn)
 
 class CustomerManagerAddOrderAction(CustomerManagerAddOrder):
+
     def add_order_action(self,first_name,first_phone,couple_name,couple_phone):
         """
         点击添加按钮---输入第一联系人姓名手机号，输入第二联系人姓名手机号，输入拍摄时间，点击确认，创建成功
@@ -102,8 +103,5 @@ if __name__ == '__main__':
     first_phone = "1578888{}".format(random.randint(1000,9999))
     current_time = datetime.datetime.now().strftime('%Y-%m-%d')
     print("current_time:",current_time)
-    customerManagerAddOrderObj.gotoPage()
-    customerManagerAddOrderObj.gotoConfirm()
-    customerManagerAddOrderObj.gotoDeliver()
-    customerManagerAddOrderObj.gotoDeliverAlbum()
-    customerManagerAddOrderObj.add_order_action(first_name,first_phone,"沐沐","17764505169",current_time)
+    customerManagerAddOrderObj.gotoDeliverAlbumAction()
+    customerManagerAddOrderObj.add_order_action(first_name,first_phone,"沐沐","17764505169")

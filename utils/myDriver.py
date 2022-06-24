@@ -6,7 +6,8 @@
 # @Software  :   PyCharm
 
 from selenium import webdriver
-from utils.mySettings import loginUrl, account, password,webdriverDir
+from utils.mySettings import loginUrl, account, password
+from selenium.webdriver.common.by import By
 
 
 class Driver:
@@ -17,11 +18,11 @@ class Driver:
     def get_driver(cls, browserName="Chrome"):
         if cls._driver == None:
             if browserName == "Chrome":
-                cls._driver = webdriver.Chrome(webdriverDir)
+                cls._driver = webdriver.Chrome()
             elif browserName == "ie":
-                cls._driver = webdriver.Ie(webdriverDir)
+                cls._driver = webdriver.Ie()
             elif browserName == "firefox":
-                cls._driver == webdriver.Firefox(webdriverDir)
+                cls._driver == webdriver.Firefox()
             else:
                 raise ("找不到浏览器，请检查传参")
             # 第一次，设置最大化和隐式等待
@@ -44,11 +45,10 @@ class Driver:
         cls._driver.get(loginUrl)
         # if cls._driver.current_url != loginUrl:
         #     cls._driver.switch_to(loginUrl)
-        cls._driver.find_element_by_css_selector(".index-module__account--238f5 input").send_keys(account)
-        cls._driver.find_element_by_css_selector(".index-module__password--1fHpE input").send_keys(password)
-        cls._driver.find_element_by_class_name("index-module__login-btn--1En8M").click()
+        cls._driver.find_element(By.XPATH, '//input[@type="text"]').send_keys(account)
+        cls._driver.find_element(By.XPATH, '//input[@type="password"]').send_keys(password)
+        cls._driver.find_element_by_class_name("Login_style_login-btn__2uWWj").click()
 
 
 if __name__ == '__main__':
     Driver.get_driver()
-

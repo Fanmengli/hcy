@@ -6,28 +6,38 @@
 # @Software  :   PyCharm
 
 import time
-from selenium import webdriver
-from pages.basePage import BasePage
 from selenium.webdriver.common.by import By
+from pages.basePage import BasePage
 from utils.mySettings import customerManagerUrl
 
 
 class HomePage(BasePage):
-    customerManagerButton = (By.ID, u"serviceCardItem4")
 
     def __init__(self):
         super().__init__()
 
-    def customerManagerButtonBox(self):
-        return self.find_element(self.customerManagerButton)
+    """确认按钮"""
+    confirmButton = (By.CSS_SELECTOR, "div[class=\"hljd-modal-body\"]>img:first-child")
+    """进入客户管理系统"""
+    enterCustomerManagerButton = (
+        By.CSS_SELECTOR, "div[class=\"MoreComponent_style_container__PXeut\"]>div:nth-child(2)")
+
+    def confirmBox(self):
+        """进入crm系统后的确认弹框"""
+        return self.get_element(self.confirmButton, 10)
+
+    def enterCustomerManagementBox(self):
+        """进入客户管理系统页面"""
+        return self.find_element(self.enterCustomerManagerButton)
+
 
 class HomePageAction(HomePage):
 
     def gotoPage(self):
+        self.confirmBox().click()
         time.sleep(1)
-        self.customerManagerButtonBox().click()
+        self.enterCustomerManagementBox().click()
         self.switch_to_page(customerManagerUrl)
-
 
 if __name__ == '__main__':
     HomePageAction().gotoPage()
